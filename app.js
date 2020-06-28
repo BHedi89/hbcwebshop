@@ -15,7 +15,8 @@ const removeItem = document.querySelector(".remove-item");
 const itemAmount = document.querySelector(".item-amount");
 const cartTotal = document.querySelector(".cart-total");
 const clearCartButton = document.querySelector(".clear-cart-btn");
-const productDOM = document.querySelector(".product-center")
+const productDOM = document.querySelector(".product-center");
+const productDOM2 = document.querySelector(".product-center2")
 const cartItemDOM = document.querySelector(".cart");
 const cartOverlay = document.querySelector(".cart-overlay");
 const cartBtn = document.querySelector(".cart-btn");
@@ -40,10 +41,10 @@ class Product {
 
             let products = contentful.items;
             products = products.map(item => {
-                const { title, price, description } = item.fields;
+                const { title, price, description, type } = item.fields;
                 const { id } = item.sys;
                 const image = item.fields.image.fields.file.url;
-                return { title, price, id, image, description };
+                return { title, price, id, image, description, type };
             });
 
             return products;
@@ -55,37 +56,71 @@ class Product {
 
 class UI {
     //display products from Contentful
-    displayProducts(products) {
+    displayBeadProducts(products) {
         let result = "";
         products.forEach(product => {
-            result += `
-            <article class="product">
-              <div class="card">
-                <div class="products-images">
-                    <img
-                      src=${product.image}
-                      alt="product"
-                      class="product-img card-img-top zoom"
-                    />
-                    <button class="add-cart-btn" data-id=${product.id}>
-                      <i class="fas fa-shopping-cart second-shopping-cart"></i>
-                      add to cart
-                    </button>
-                </div>
-                <div class="card-body">
-                  <p>${product.title}<button class="fas fa-info-circle" data-id=${product.id}></button></p>
-                  <p>${product.price} HUF</p>
-                </div>
-              </div>
-            </article>`;
+            if(product.type === "bead") {
+                result += `
+                    <article class="product">
+                    <div class="card">
+                        <div class="products-images">
+                            <img
+                            src=${product.image}
+                            alt="product"
+                            class="product-img card-img-top zoom"
+                            />
+                            <button class="add-cart-btn" data-id=${product.id}>
+                            <i class="fas fa-shopping-cart second-shopping-cart"></i>
+                            add to cart
+                            </button>
+                        </div>
+                        <div class="card-body">
+                        <p>${product.title}<button class="fas fa-info-circle" data-id=${product.id}></button></p>
+                        <p>${product.price} HUF</p>
+                        </div>
+                    </div>
+                    </article>`;
+            }
         });
         productDOM.innerHTML = result;
-    }
+    };
+
+    //display products from Contentful
+    displaySoutacheProducts(products) {
+        let result = "";
+        products.forEach(product => {
+            if(product.type === "soutache") {
+                result += `
+                    <article class="product">
+                    <div class="card">
+                        <div class="products-images">
+                            <img
+                            src=${product.image}
+                            alt="product"
+                            class="product-img card-img-top zoom"
+                            />
+                            <button class="add-cart-btn" data-id=${product.id}>
+                            <i class="fas fa-shopping-cart second-shopping-cart"></i>
+                            add to cart
+                            </button>
+                        </div>
+                        <div class="card-body">
+                        <p>${product.title}<button class="fas fa-info-circle" data-id=${product.id}></button></p>
+                        <p>${product.price} HUF</p>
+                        </div>
+                    </div>
+                    </article>`;
+            }
+        });
+        productDOM2.innerHTML = result;
+    };
 
     //"add to cart" buttons funcionality
     getCartButton() {
         let cartButtons = [...document.querySelectorAll(".add-cart-btn")]; //make an array from the buttons
         cartButtonsList = cartButtons;
+        console.log(cartButtonsList);
+        
 
         cartButtons.forEach(button => {
             let buttonId = button.dataset.id;
@@ -345,7 +380,8 @@ document.addEventListener("DOMContentLoaded", () => {
     ui.setupAPP();
 
     products.getProducts().then(products => {
-        ui.displayProducts(products);
+        ui.displayBeadProducts(products);
+        ui.displaySoutacheProducts(products);
         Storage.saveProduct(products);
     }).then(() => {
         ui.getCartButton();
@@ -354,4 +390,5 @@ document.addEventListener("DOMContentLoaded", () => {
         ui.getMenu();
         ui.closeMenu();
     });
+
 });

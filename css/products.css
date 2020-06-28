@@ -22,6 +22,17 @@
     grid-row-gap: 2rem;
 }
 
+.product-center2 {
+    width: 90vw;
+    margin: 0 auto;
+    padding-top: 120px;
+    max-width: 1170px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-column-gap: 1.5rem;
+    grid-row-gap: 2rem;
+}
+
 .product-img {
     transition: all 0.3s linear;
     object-fit: cover;
