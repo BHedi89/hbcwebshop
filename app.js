@@ -348,7 +348,55 @@ class UI {
     hideMenu() {
         menuOverlay.classList.remove("transparentBcgMenu");
     };
-    
+
+    scrollDownToBeadCollection(){
+        const beadBtn = document.querySelector(".bead-btn");
+        const beadCollection = document.querySelector(".bead-title");
+
+        beadBtn.addEventListener("click", () => {
+            beadCollection.scrollIntoView();
+        });
+
+    };
+
+    scrollDownToSoutacheCollection() {
+        const soutacheBtn = document.querySelector(".soutache-btn");
+        const soutacheCollection = document.querySelector(".soutache-title");
+
+        soutacheBtn.addEventListener("click", () => {
+            soutacheCollection.scrollIntoView();
+        });
+    };
+
+    goBackToHomePage() {
+        const homePage = document.querySelector(".menu-to-home");
+
+        homePage.addEventListener("click", () => {
+            window.open("https://hedisbeadcollection.netlify.app");
+        });
+    };
+
+    scrollDownToProduct() {
+        const productBtn = document.querySelector(".menu-to-products");
+        const products = document.querySelector(".header2-container");
+
+        productBtn.addEventListener("click", () => {
+            document.getElementById("myMenu").style.width = "0";
+            this.hideMenu();
+            products.scrollIntoView();
+        });
+    };
+
+    scrollDownToContact() {
+        const productBtn = document.querySelector(".menu-to-contact");
+        const products = document.querySelector(".footer");
+
+        productBtn.addEventListener("click", () => {
+            document.getElementById("myMenu").style.width = "0";
+            this.hideMenu();
+            products.scrollIntoView();
+        });
+    };
 }
 
 //using local storage to save datas
@@ -389,6 +437,11 @@ document.addEventListener("DOMContentLoaded", () => {
         ui.getProductInfo();
         ui.getMenu();
         ui.closeMenu();
+        ui.scrollDownToBeadCollection();
+        ui.scrollDownToSoutacheCollection();
+        ui.goBackToHomePage();
+        ui.scrollDownToProduct();
+        ui.scrollDownToContact();
     });
 
 });
