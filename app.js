@@ -119,8 +119,6 @@ class UI {
     getCartButton() {
         let cartButtons = [...document.querySelectorAll(".add-cart-btn")]; //make an array from the buttons
         cartButtonsList = cartButtons;
-        console.log(cartButtonsList);
-        
 
         cartButtons.forEach(button => {
             let buttonId = button.dataset.id;
@@ -306,7 +304,7 @@ class UI {
     //clear the modal
     clearModal() {
         const modalItem = document.querySelector(".modal-item");
-        modalContent.removeChild(modalItem); //error????? but working
+        modalContent.removeChild(modalItem);
     };
 
     //display the modal
