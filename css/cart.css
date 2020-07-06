@@ -60,6 +60,11 @@
     margin-bottom: 2rem;
 }
 
+hr {
+    border-top: 2px solid black;
+    margin-top: 40px;
+}
+
 /*---------- cart item ----------*/
 
 .cart-item {
